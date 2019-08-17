@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import Header from '~/components/Header.vue';
-import Resume from '~/components/Resume.vue'
-import Footer from '~/components/Footer.vue';
+import Header from "~/components/Header.vue";
+import Resume from "~/components/Resume.vue";
+import Footer from "~/components/Footer.vue";
 
 export default {
   components: {
@@ -16,7 +16,7 @@ export default {
     Resume,
     Footer
   }
-}
+};
 </script>
 
 <style>
