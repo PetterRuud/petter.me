@@ -23,7 +23,7 @@ module.exports = {
   */
  css: [
   // SCSS file in the project
-  '@/assets/style/main.scss'
+  '@/assets/main.scss'
   ],
   build: {
     /*

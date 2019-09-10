@@ -18,11 +18,11 @@
 
 <script>
 import AppLogo from "~/components/AppLogo.vue";
-import Button from "~/components/Button.vue";
+// import Button from "~/components/Button.vue";
 export default {
   components: {
     AppLogo,
-    Button
+    // Button
   }
 };
 </script>
