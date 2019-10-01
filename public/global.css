@@ -10,9 +10,8 @@ body {
 	font-size: 16px;
 	font-family: stratos-lights, sans-serif;
 	height: 100vh;
-    background: black
-      url("/bg.jpg")
-	  right bottom no-repeat;
+    background: black;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, .5);
 }
 
 a {
@@ -44,8 +43,9 @@ a:hover:after {
 	padding: 24px;
 	margin: auto;
 	height: 100vh;
-	position: relative;
-	z-index: ;
+	background: black
+      url("/bg.jpg")
+		110% bottom no-repeat;
 }
 
 header {
@@ -93,6 +93,19 @@ main p {
 	font-weight: 300;
 	margin: 0;
 	max-width: 760px;
+}
+
+@media(max-width: 760px) {
+
+	.container {
+	}
+	main h1 {
+		font-size: 66px;
+	}
+	
+	main p {
+		font-size: 24px;
+	}
 }
 
 @keyframes underline {

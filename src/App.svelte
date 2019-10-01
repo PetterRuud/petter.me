@@ -27,10 +27,12 @@
     </ul>
   </header>
   <main>
-    <h1>Hello</h1>
-    <p>
-      Petter Ruud is an experienced full-stack developer at Sopra Steria, where
-      he has a primary focus on front-end development.
-    </p>
+    <article>
+      <h1>Hello</h1>
+      <p>
+        Petter Ruud is an experienced full-stack developer at Sopra Steria,
+        where he has a primary focus on front-end development.
+      </p>
+    </article>
   </main>
 </div>
