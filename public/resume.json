@@ -1,51 +1,50 @@
 {
   "jobs": [
     {
-      "company": "SOPRA STERIA",
+      "company": "Sopra Steria",
       "role": "SENIOR SOFTWARE ENGINEER",
       "date": "2018 - NOW",
       "description": "Freelancer"
     },
     {
-      "company": "TIMEGRIP",
-      "role": "HEAD OF DESIGN & AESTHETICS",
+      "company": "Timegrip",
+      "role": "Senior Engineer",
       "date": "2017 - 2018",
       "description": "Freelancer"
     },
     {
-      "company": "GOOD MORNING",
+      "company": "Good Morning",
       "role": "Senior developer",
       "date": "2015 - 2017",
       "description": "Jobber med utvikling av store og små webløsninger med morgendagens teknologi."
     },
     {
       "company": "KRÉATIF",
-      "role": "DEVELOPER",
+      "role": "Senior Developer",
       "date": "2013 - 2015",
       "description": "Videreutvikling/refactoring av bedriftens egenutviklede CMS (.Net, MSSQL, JavaScript). Implementering av HTML, CSS og Javascript mot vårt CMS og Wordpress. Utvikle kundespesikfikke moduler. Integrasjon mot andre datasystemer (VISMA, WinOrg m.v)."
     },
     {
-      "company": "CUSTOMPUBLISH",
-      "role": "CREATIVE DEVELOPER",
+      "company": "Custompublish AS",
+      "role": "Creative Devloper",
       "date": "2009 - 2013",
       "description": "Jobbet med webdesign og implementering av websider og webløsninger for små og store kunder i inn- og utland. Dette innebærer alt fra kundemøter med kartlegging av ønsker og behov til utarbeidelse av designskisser, forslag til interaksjonsarkitektur og implemtering av HTML, CSS og Javascript opp mot CustomPublish CMS. Også vært med å videreutvikle administrasjonsgrensesnitt og funksjonalitet i CustomPublish CMS."
     },
     {
-      "company": "DOGME",
+      "company": "Dogme",
       "role": "HEAD OF DESIGN & AESTHETICS",
       "date": "2007 - 2015",
       "description": "Freelancer"
     }
-
   ],
   "projects": [
     {
       "title": "Champ",
-      "subtitle": "SOCIAL FITNESS APP",
+      "subtitle": "Social fitness App",
       "date": "2016",
-      "description": "SMALL SCRIPTS & SUCH",
+      "description": "",
       "link": {
-        "link": "/playground",
+        "uri": "/playground",
         "title": "App store"
       }
     },
@@ -55,21 +54,9 @@
       "date": "2013",
       "description": "Krid uses the simpliest concepts of css3 that I cant believe was a standard from the beginning, box-sizing. And with the power of LESS, you can simply say how many column you want, how big the gutters you want aswell as if you want fluid or fixed columns. ",
       "link": {
-        "link": "/playground",
-        "title": "App store"
-      }
-    },
-    {
-      "title": "PLAYGROUND",
-      "subtitle": "",
-      "date": "0 BC",
-      "description": "SMALL SCRIPTS & SUCH",
-      "link": {
-        "link": "/playground",
-        "title": "App store"
+        "uri": "https://krid.petter.me",
+        "title": "Krid"
       }
     }
-
   ]
 }
-
