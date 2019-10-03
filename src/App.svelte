@@ -1,5 +1,5 @@
 <div class="container">
-  <header class="header">
+  <header class="header" role="banner">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 261.5 290.29">
       <title>Petter</title>
       <path
@@ -15,16 +15,18 @@
         fill="currentcolor"
         stroke-miterlimit="10" />
     </svg>
-    <ul class="links">
-      <li>
-        <a href="https://www.linkedin.com/in/petterr" title="LinekdIn">
-          LinkedIn
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/PetterRuud/" title="GitHub">GitHub</a>
-      </li>
-    </ul>
+    <nav>
+      <ul class="links">
+        <li>
+          <a href="https://www.linkedin.com/in/petterr" title="LinekdIn">
+            LinkedIn
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/PetterRuud/" title="GitHub">GitHub</a>
+        </li>
+      </ul>
+    </nav>
   </header>
   <main>
     <article>
