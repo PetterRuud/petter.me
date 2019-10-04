@@ -10,8 +10,8 @@ body {
 	font-size: 16px;
 	font-family: stratos-lights, sans-serif;
 	height: 100vh;
-    background: black;
-		text-shadow: 0 1px 1px rgba(0, 0, 0, .5);
+    	background: black;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .5);
 }
 
 a {
@@ -35,7 +35,7 @@ a:after {
 
 a:hover:after {
 	transform-origin: left;
-    transform: scaleX(1);
+    	transform: scaleX(1);
 }
 
 .container {
@@ -43,9 +43,7 @@ a:hover:after {
 	padding: 24px;
 	margin: auto;
 	height: 100vh;
-	background: black
-      url("/bg.jpg")
-		110% bottom no-repeat;
+	background: black url("/bg.jpg") 110% bottom no-repeat;
 }
 
 header {
@@ -68,13 +66,15 @@ header nav {
 }
 
 header .links {
+	display: flex;
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	align-items: center;
 }
 
 header .links li {
-    margin-right: 24px;
+    	margin-right: 24px;
 }
 
 main {
