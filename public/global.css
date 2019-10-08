@@ -3,14 +3,14 @@
 }
 
 body {
-	color: white;
+	color: greenyellow;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-size: 16px;
-	font-family: stratos-lights, sans-serif;
+	font-family: ff-typestar-black-web,Input Sans,Lucida Console,Monaco,monospace;
 	height: 100vh;
-    	background: black;
+	background: black url("/bg.jpg") right bottom no-repeat;
 	text-shadow: 0 1px 1px rgba(0, 0, 0, .5);
 }
 
@@ -35,7 +35,7 @@ a:after {
 
 a:hover:after {
 	transform-origin: left;
-    	transform: scaleX(1);
+    transform: scaleX(1);
 }
 
 .container {
@@ -43,7 +43,6 @@ a:hover:after {
 	padding: 24px;
 	margin: auto;
 	height: 100vh;
-	background: black url("/bg.jpg") 110% bottom no-repeat;
 }
 
 header {
@@ -87,15 +86,17 @@ main {
 main h1 {
 	font-size: 120px;
 	margin: 0;
-	font-weight: 700;
+	font-weight: 900;
 }
 
 main p {
 	font-size: 36px;
-	font-family: stratos-lights, sans-serif;
-	font-weight: 300;
 	margin: 0;
 	max-width: 760px;
+}
+
+main p .carret {
+	animation: blink 1s infinite;
 }
 
 @media(max-width: 760px) {
@@ -111,11 +112,14 @@ main p {
 	}
 }
 
-@keyframes underline {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
+@keyframes blink {
+    0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+    100% {
+      opacity: 0;
     }
   }
