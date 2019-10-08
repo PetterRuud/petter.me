@@ -15,7 +15,7 @@ body {
 }
 
 a {
-	color: white;
+	color: greenyellow;
 	position: relative;
 	text-decoration: none;
 	padding: 8px 0;
@@ -23,7 +23,7 @@ a {
 
 a:after {
 	content: "";
-	border-bottom: solid 2px white;
+	border-bottom: solid 2px greenyellow;
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -35,7 +35,7 @@ a:after {
 
 a:hover:after {
 	transform-origin: left;
-    transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 .container {
@@ -73,7 +73,7 @@ header .links {
 }
 
 header .links li {
-    	margin-right: 24px;
+  margin-right: 24px;
 }
 
 main {
@@ -87,6 +87,8 @@ main h1 {
 	font-size: 120px;
 	margin: 0;
 	font-weight: 900;
+	text-transform: uppercase;
+  letter-spacing: 4px;
 }
 
 main p {
@@ -101,25 +103,23 @@ main p .carret {
 
 @media(max-width: 760px) {
 
-	.container {
-	}
 	main h1 {
 		font-size: 66px;
 	}
-	
+
 	main p {
 		font-size: 24px;
 	}
 }
 
 @keyframes blink {
-    0% {
+  0% {
 		opacity: 0;
 	}
 	50% {
 		opacity: 1;
 	}
-    100% {
-      opacity: 0;
-    }
+  100% {
+    opacity: 0;
   }
+}
