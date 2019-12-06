@@ -11,7 +11,8 @@ body {
 	font-family: ff-typestar-black-web,Input Sans,Lucida Console,Monaco,monospace;
 	height: 100vh;
 	background: black url("/bg.jpg") right bottom no-repeat;
-	text-shadow: 0 1px 1px rgba(0, 0, 0, .5);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .5);
+  background-position-y: top;
 }
 
 a {
