@@ -1,3 +1,12 @@
+<script context="module" lang="ts">
+	export const prerender = true;
+</script>
+
+
+<svelte:head>
+	<title>Petter Ruud</title>
+</svelte:head>
+
 <div class="container">
   <header class="header" role="banner">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 261.5 290.29">
@@ -39,3 +48,4 @@
     </article>
   </main>
 </div>
+
