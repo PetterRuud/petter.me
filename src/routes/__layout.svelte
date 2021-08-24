@@ -11,6 +11,4 @@
 	/>
 </svelte:head>
 
-<main>
-	<slot />
-</main>
+<slot />
