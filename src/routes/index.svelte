@@ -41,8 +41,8 @@
 		<article>
 			<h1>Hello</h1>
 			<p>
-				Petter Ruud is an experienced full-stack developer at Sopra Steria, where he has a primary
-				focus on front-end development
+				Petter Ruud is an experienced full-stack developer at JPro, where he has a primary focus on
+				front-end development
 				<span class="carret">_</span>
 			</p>
 		</article>
