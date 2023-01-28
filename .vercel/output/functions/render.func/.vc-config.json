@@ -1,1 +1,1 @@
-{"runtime":"nodejs18.x","handler":".svelte-kit/vercel-tmp/index.js","launcherType":"Nodejs"}
+{"runtime":"edge","entrypoint":"index.js"}

@@ -1,6 +1,413 @@
-import { n as noop, s as safe_not_equal } from "./chunks/index.js";
-import { a as assets, b as base, p as public_env, v as version, o as options, g as get_hooks, s as set_public_env } from "./chunks/internal.js";
-const DEV = false;
+globalThis.global = globalThis;
+var __defProp = Object.defineProperty;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __defNormalProp = (obj, key2, value) => key2 in obj ? __defProp(obj, key2, { enumerable: true, configurable: true, writable: true, value }) : obj[key2] = value;
+var __esm = (fn, res) => function __init() {
+  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __publicField = (obj, key2, value) => {
+  __defNormalProp(obj, typeof key2 !== "symbol" ? key2 + "" : key2, value);
+  return value;
+};
+var __accessCheck = (obj, member, msg) => {
+  if (!member.has(obj))
+    throw TypeError("Cannot " + msg);
+};
+var __privateGet = (obj, member, getter) => {
+  __accessCheck(obj, member, "read from private field");
+  return getter ? getter.call(obj) : member.get(obj);
+};
+var __privateAdd = (obj, member, value) => {
+  if (member.has(obj))
+    throw TypeError("Cannot add the same private member more than once");
+  member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
+};
+var __privateSet = (obj, member, value, setter) => {
+  __accessCheck(obj, member, "write to private field");
+  setter ? setter.call(obj, value) : member.set(obj, value);
+  return value;
+};
+
+// .svelte-kit/output/server/chunks/index.js
+function noop() {
+}
+function run(fn) {
+  return fn();
+}
+function blank_object() {
+  return /* @__PURE__ */ Object.create(null);
+}
+function run_all(fns) {
+  fns.forEach(run);
+}
+function safe_not_equal(a, b) {
+  return a != a ? b == b : a !== b || (a && typeof a === "object" || typeof a === "function");
+}
+function subscribe(store, ...callbacks) {
+  if (store == null) {
+    return noop;
+  }
+  const unsub = store.subscribe(...callbacks);
+  return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+}
+function set_current_component(component4) {
+  current_component = component4;
+}
+function get_current_component() {
+  if (!current_component)
+    throw new Error("Function called outside component initialization");
+  return current_component;
+}
+function setContext(key2, context) {
+  get_current_component().$$.context.set(key2, context);
+  return context;
+}
+function getContext(key2) {
+  return get_current_component().$$.context.get(key2);
+}
+function escape(value, is_attr = false) {
+  const str = String(value);
+  const pattern2 = is_attr ? ATTR_REGEX : CONTENT_REGEX;
+  pattern2.lastIndex = 0;
+  let escaped2 = "";
+  let last = 0;
+  while (pattern2.test(str)) {
+    const i = pattern2.lastIndex - 1;
+    const ch = str[i];
+    escaped2 += str.substring(last, i) + (ch === "&" ? "&amp;" : ch === '"' ? "&quot;" : "&lt;");
+    last = i + 1;
+  }
+  return escaped2 + str.substring(last);
+}
+function validate_component(component4, name) {
+  if (!component4 || !component4.$$render) {
+    if (name === "svelte:component")
+      name += " this={...}";
+    throw new Error(`<${name}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${name}>.`);
+  }
+  return component4;
+}
+function create_ssr_component(fn) {
+  function $$render(result, props, bindings, slots, context) {
+    const parent_component = current_component;
+    const $$ = {
+      on_destroy,
+      context: new Map(context || (parent_component ? parent_component.$$.context : [])),
+      // these will be immediately discarded
+      on_mount: [],
+      before_update: [],
+      after_update: [],
+      callbacks: blank_object()
+    };
+    set_current_component({ $$ });
+    const html = fn(result, props, bindings, slots);
+    set_current_component(parent_component);
+    return html;
+  }
+  return {
+    render: (props = {}, { $$slots = {}, context = /* @__PURE__ */ new Map() } = {}) => {
+      on_destroy = [];
+      const result = { title: "", head: "", css: /* @__PURE__ */ new Set() };
+      const html = $$render(result, props, {}, $$slots, context);
+      run_all(on_destroy);
+      return {
+        html,
+        css: {
+          code: Array.from(result.css).map((css) => css.code).join("\n"),
+          map: null
+          // TODO
+        },
+        head: result.title + result.head
+      };
+    },
+    $$render
+  };
+}
+var current_component, ATTR_REGEX, CONTENT_REGEX, missing_component, on_destroy;
+var init_chunks = __esm({
+  ".svelte-kit/output/server/chunks/index.js"() {
+    Promise.resolve();
+    ATTR_REGEX = /[&"]/g;
+    CONTENT_REGEX = /[&<]/g;
+    missing_component = {
+      $$render: () => ""
+    };
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_layout.svelte.js
+var layout_svelte_exports = {};
+__export(layout_svelte_exports, {
+  default: () => Layout
+});
+var Layout;
+var init_layout_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_layout.svelte.js"() {
+    init_chunks();
+    Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${$$result.head += `<!-- HEAD_svelte-o63cus_START --><link rel="${"preconnect"}" href="${"https://fonts.googleapis.com"}"><link rel="${"preconnect"}" href="${"https://fonts.gstatic.com"}" crossorigin="${"true"}"><link href="${"https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"}" rel="${"stylesheet"}"><!-- HEAD_svelte-o63cus_END -->`, ""}
+
+${slots.default ? slots.default({}) : ``}`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/0.js
+var __exports = {};
+__export(__exports, {
+  component: () => component,
+  file: () => file,
+  fonts: () => fonts,
+  imports: () => imports,
+  index: () => index,
+  stylesheets: () => stylesheets
+});
+var index, component, file, imports, stylesheets, fonts;
+var init__ = __esm({
+  ".svelte-kit/output/server/nodes/0.js"() {
+    index = 0;
+    component = async () => (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
+    file = "_app/immutable/components/pages/_layout.svelte-0fb68e70.js";
+    imports = ["_app/immutable/components/pages/_layout.svelte-0fb68e70.js", "_app/immutable/chunks/index-2cc330bf.js"];
+    stylesheets = ["_app/immutable/assets/_layout-4e8e9fab.css"];
+    fonts = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
+var error_svelte_exports = {};
+__export(error_svelte_exports, {
+  default: () => Error$1
+});
+var getStores, page, Error$1;
+var init_error_svelte = __esm({
+  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
+    init_chunks();
+    getStores = () => {
+      const stores = getContext("__svelte__");
+      return {
+        page: {
+          subscribe: stores.page.subscribe
+        },
+        navigating: {
+          subscribe: stores.navigating.subscribe
+        },
+        updated: stores.updated
+      };
+    };
+    page = {
+      /** @param {(value: any) => void} fn */
+      subscribe(fn) {
+        const store = getStores().page;
+        return store.subscribe(fn);
+      }
+    };
+    Error$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $page, $$unsubscribe_page;
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      $$unsubscribe_page();
+      return `<h1>${escape($page.status)}</h1>
+<p>${escape($page.error?.message)}</p>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/1.js
+var __exports2 = {};
+__export(__exports2, {
+  component: () => component2,
+  file: () => file2,
+  fonts: () => fonts2,
+  imports: () => imports2,
+  index: () => index2,
+  stylesheets: () => stylesheets2
+});
+var index2, component2, file2, imports2, stylesheets2, fonts2;
+var init__2 = __esm({
+  ".svelte-kit/output/server/nodes/1.js"() {
+    index2 = 1;
+    component2 = async () => (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
+    file2 = "_app/immutable/components/error.svelte-476e0f9b.js";
+    imports2 = ["_app/immutable/components/error.svelte-476e0f9b.js", "_app/immutable/chunks/index-2cc330bf.js", "_app/immutable/chunks/singletons-f13ea139.js"];
+    stylesheets2 = [];
+    fonts2 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/_page.svelte.js
+var page_svelte_exports = {};
+__export(page_svelte_exports, {
+  default: () => Page
+});
+var Page;
+var init_page_svelte = __esm({
+  ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
+    init_chunks();
+    Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      return `${$$result.head += `<!-- HEAD_svelte-5wai9z_START -->${$$result.title = `<title>Petter Ruud - Full-stack developer</title>`, ""}<!-- HEAD_svelte-5wai9z_END -->`, ""}
+
+<div class="${"container"}"><header class="${"header"}"><svg xmlns="${"http://www.w3.org/2000/svg"}" viewBox="${"0 0 261.5 290.29"}"><title>Petter</title><path d="${"M27.16,224.37C17.72,218.72,10,205.1,10,194.1V90.1c0-11,7.9-24.3,17.57-29.56l85.61-46.6c9.67-5.26,25.47-5.25,35.12,0L234,60.76C243.6,66,251.5,79.35,251.5,90.35V194.1c0,11-7.72,24.62-17.16,30.27l-86.43,51.69c-9.44,5.64-24.88,5.64-34.32,0Z"}" fill="${"none"}" stroke="${"currentcolor"}" stroke-miterlimit="${"1"}" stroke-width="${"10"}"></path><path d="${"M56.41,199.32V108.66c0-5.5,4-12.15,8.79-14.76l56.67-30.65c4.84-2.62,12.75-2.6,17.57,0l56.49,30.9c4.82,2.64,8.77,9.3,8.77,14.8v66.5c0,5.5-3.86,12.32-8.57,15.15l-56.81,34.19c-4.71,2.84-12.42,2.83-17.12,0L84.89,202.18c-4.7-2.86-8.56-.69-8.57,4.81l0,11.14c0,5.5-3.88,7.69-8.59,4.86L65,221.36c-4.71-2.83-8.57-9.64-8.57-15.14Zm65.81,2.7c4.69,2.87,12.37,2.87,17.05,0l37.16-22.79c4.68-2.88,8.52-9.73,8.52-15.23V121c0-5.5-3.95-12.16-8.77-14.8L139.33,86c-4.83-2.64-12.73-2.65-17.56,0L85.23,106c-4.83,2.63-8.78,9.29-8.78,14.79V164c0,5.5,3.84,12.35,8.53,15.22Z"}"></path><path d="${"M56.41,199.32V108.66c0-5.5,4-12.15,8.79-14.76l56.67-30.65c4.84-2.62,12.75-2.6,17.57,0l56.49,30.9c4.82,2.64,8.77,9.3,8.77,14.8v66.5c0,5.5-3.86,12.32-8.57,15.15l-56.81,34.19c-4.71,2.84-12.42,2.83-17.12,0L84.89,202.18c-4.7-2.86-8.56-.69-8.57,4.81l0,11.14c0,5.5-3.88,7.69-8.59,4.86L65,221.36c-4.71-2.83-8.57-9.64-8.57-15.14Zm65.81,2.7c4.69,2.87,12.37,2.87,17.05,0l37.16-22.79c4.68-2.88,8.52-9.73,8.52-15.23V121c0-5.5-3.95-12.16-8.77-14.8L139.33,86c-4.83-2.64-12.73-2.65-17.56,0L85.23,106c-4.83,2.63-8.78,9.29-8.78,14.79V164c0,5.5,3.84,12.35,8.53,15.22Z"}" fill="${"currentcolor"}" stroke-miterlimit="${"1"}"></path></svg>
+		<nav><ul class="${"links"}"><li><a href="${"https://www.linkedin.com/in/petterr"}" title="${"LinekdIn"}">LinkedIn </a></li>
+				<li><a href="${"https://github.com/PetterRuud/"}" title="${"GitHub"}">GitHub</a></li></ul></nav></header>
+	<main><article><h1>Hello</h1>
+			<p>Petter Ruud is an experienced full-stack developer at JPro, where he has a primary focus on
+				front-end development
+				<span class="${"carret"}">_</span></p></article></main></div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/2.js
+var __exports3 = {};
+__export(__exports3, {
+  component: () => component3,
+  file: () => file3,
+  fonts: () => fonts3,
+  imports: () => imports3,
+  index: () => index3,
+  stylesheets: () => stylesheets3
+});
+var index3, component3, file3, imports3, stylesheets3, fonts3;
+var init__3 = __esm({
+  ".svelte-kit/output/server/nodes/2.js"() {
+    index3 = 2;
+    component3 = async () => (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
+    file3 = "_app/immutable/components/pages/_page.svelte-6cde665b.js";
+    imports3 = ["_app/immutable/components/pages/_page.svelte-6cde665b.js", "_app/immutable/chunks/index-2cc330bf.js"];
+    stylesheets3 = [];
+    fonts3 = [];
+  }
+});
+
+// .svelte-kit/output/server/index.js
+init_chunks();
+
+// .svelte-kit/output/server/chunks/internal.js
+init_chunks();
+var assets = "";
+var base = "";
+var version = "";
+var public_env = {};
+function set_paths(paths) {
+  base = paths.base;
+  assets = paths.assets || base;
+}
+function set_public_env(environment) {
+  public_env = environment;
+}
+function set_version(value) {
+  version = value;
+}
+function afterUpdate() {
+}
+var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { stores } = $$props;
+  let { page: page2 } = $$props;
+  let { components } = $$props;
+  let { form } = $$props;
+  let { data_0 = null } = $$props;
+  let { data_1 = null } = $$props;
+  {
+    setContext("__svelte__", stores);
+  }
+  afterUpdate(stores.page.notify);
+  if ($$props.stores === void 0 && $$bindings.stores && stores !== void 0)
+    $$bindings.stores(stores);
+  if ($$props.page === void 0 && $$bindings.page && page2 !== void 0)
+    $$bindings.page(page2);
+  if ($$props.components === void 0 && $$bindings.components && components !== void 0)
+    $$bindings.components(components);
+  if ($$props.form === void 0 && $$bindings.form && form !== void 0)
+    $$bindings.form(form);
+  if ($$props.data_0 === void 0 && $$bindings.data_0 && data_0 !== void 0)
+    $$bindings.data_0(data_0);
+  if ($$props.data_1 === void 0 && $$bindings.data_1 && data_1 !== void 0)
+    $$bindings.data_1(data_1);
+  {
+    stores.page.set(page2);
+  }
+  return `
+
+
+${components[1] ? `${validate_component(components[0] || missing_component, "svelte:component").$$render($$result, { data: data_0 }, {}, {
+    default: () => {
+      return `${validate_component(components[1] || missing_component, "svelte:component").$$render($$result, { data: data_1, form }, {}, {})}`;
+    }
+  })}` : `${validate_component(components[0] || missing_component, "svelte:component").$$render($$result, { data: data_0, form }, {}, {})}`}
+
+${``}`;
+});
+set_paths({ "base": "", "assets": "" });
+set_version("1674914589595");
+var options = {
+  csp: { "mode": "auto", "directives": { "upgrade-insecure-requests": false, "block-all-mixed-content": false }, "reportOnly": { "upgrade-insecure-requests": false, "block-all-mixed-content": false } },
+  csrf_check_origin: true,
+  embedded: false,
+  env_public_prefix: "PUBLIC_",
+  hooks: null,
+  // added lazily, via `get_hooks`
+  root: Root,
+  service_worker: false,
+  templates: {
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n\n		' + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover">\n		<div style="display: contents">' + body + "</div>\n	</body>\n</html>\n",
+    error: ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
+
+		<style>
+			body {
+				font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+					Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+			}
+
+			.error {
+				display: flex;
+				align-items: center;
+				max-width: 32rem;
+				margin: 0 1rem;
+			}
+
+			.status {
+				font-weight: 200;
+				font-size: 3rem;
+				line-height: 1;
+				position: relative;
+				top: -0.05rem;
+			}
+
+			.message {
+				border-left: 1px solid #ccc;
+				padding: 0 0 0 1rem;
+				margin: 0 0 0 1rem;
+				min-height: 2.5rem;
+				display: flex;
+				align-items: center;
+			}
+
+			.message h1 {
+				font-weight: 400;
+				font-size: 1em;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="error">
+			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
+  }
+};
+function get_hooks() {
+  return {};
+}
+
+// .svelte-kit/output/server/index.js
+var DEV = false;
 function negotiate(accept, types) {
   const parts = [];
   accept.split(",").forEach((str, i) => {
@@ -43,7 +450,7 @@ function is_content_type(request, ...types) {
 function is_form_content_type(request) {
   return is_content_type(request, "application/x-www-form-urlencoded", "multipart/form-data");
 }
-let HttpError = class HttpError2 {
+var HttpError = class HttpError2 {
   /**
    * @param {number} status
    * @param {{message: string} extends App.Error ? (App.Error | string | undefined) : App.Error} body
@@ -62,7 +469,7 @@ let HttpError = class HttpError2 {
     return JSON.stringify(this.body);
   }
 };
-let Redirect = class Redirect2 {
+var Redirect = class Redirect2 {
   /**
    * @param {300 | 301 | 302 | 303 | 304 | 305 | 306 | 307 | 308} status
    * @param {string} location
@@ -72,7 +479,7 @@ let Redirect = class Redirect2 {
     this.location = location;
   }
 };
-let ActionFailure = class ActionFailure2 {
+var ActionFailure = class ActionFailure2 {
   /**
    * @param {number} status
    * @param {T} [data]
@@ -82,7 +489,7 @@ let ActionFailure = class ActionFailure2 {
     this.data = data;
   }
 };
-const escaped = {
+var escaped = {
   "<": "\\u003C",
   ">": "\\u003E",
   "/": "\\u002F",
@@ -96,7 +503,7 @@ const escaped = {
   "\u2028": "\\u2028",
   "\u2029": "\\u2029"
 };
-class DevalueError extends Error {
+var DevalueError = class extends Error {
   /**
    * @param {string} message
    * @param {string[]} keys
@@ -106,11 +513,11 @@ class DevalueError extends Error {
     this.name = "DevalueError";
     this.path = keys.join("");
   }
-}
+};
 function is_primitive(thing) {
   return Object(thing) !== thing;
 }
-const object_proto_names = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
+var object_proto_names = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
 function is_plain_object(thing) {
   const proto = Object.getPrototypeOf(thing);
   return proto === Object.prototype || proto === null || Object.getOwnPropertyNames(proto).sort().join("\0") === object_proto_names;
@@ -141,9 +548,9 @@ function stringify_string(str) {
   result += '"';
   return result;
 }
-const chars$1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_$";
-const unsafe_chars = /[<>\b\f\n\r\t\0\u2028\u2029]/g;
-const reserved = /^(?:do|if|in|for|int|let|new|try|var|byte|case|char|else|enum|goto|long|this|void|with|await|break|catch|class|const|final|float|short|super|throw|while|yield|delete|double|export|import|native|return|switch|throws|typeof|boolean|default|extends|finally|package|private|abstract|continue|debugger|function|volatile|interface|protected|transient|implements|instanceof|synchronized)$/;
+var chars$1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_$";
+var unsafe_chars = /[<>\b\f\n\r\t\0\u2028\u2029]/g;
+var reserved = /^(?:do|if|in|for|int|let|new|try|var|byte|case|char|else|enum|goto|long|this|void|with|await|break|catch|class|const|final|float|short|super|throw|while|yield|delete|double|export|import|native|return|switch|throws|typeof|boolean|default|extends|finally|package|private|abstract|continue|debugger|function|volatile|interface|protected|transient|implements|instanceof|synchronized)$/;
 function uneval(value) {
   const counts = /* @__PURE__ */ new Map();
   const keys = [];
@@ -344,12 +751,12 @@ function stringify_primitive$1(thing) {
     return thing + "n";
   return str;
 }
-const UNDEFINED = -1;
-const HOLE = -2;
-const NAN = -3;
-const POSITIVE_INFINITY = -4;
-const NEGATIVE_INFINITY = -5;
-const NEGATIVE_ZERO = -6;
+var UNDEFINED = -1;
+var HOLE = -2;
+var NAN = -3;
+var POSITIVE_INFINITY = -4;
+var NEGATIVE_INFINITY = -5;
+var NEGATIVE_ZERO = -6;
 function stringify(value) {
   const stringified = [];
   const indexes = /* @__PURE__ */ new Map();
@@ -371,8 +778,8 @@ function stringify(value) {
       return NEGATIVE_INFINITY;
     if (thing === 0 && 1 / thing < 0)
       return NEGATIVE_ZERO;
-    const index2 = p++;
-    indexes.set(thing, index2);
+    const index22 = p++;
+    indexes.set(thing, index22);
     let str = "";
     if (is_primitive(thing)) {
       str = stringify_primitive(thing);
@@ -462,12 +869,12 @@ function stringify(value) {
           }
       }
     }
-    stringified[index2] = str;
-    return index2;
+    stringified[index22] = str;
+    return index22;
   }
-  const index = flatten(value);
-  if (index < 0)
-    return `${index}`;
+  const index4 = flatten(value);
+  if (index4 < 0)
+    return `${index4}`;
   return `[${stringified.join(",")}]`;
 }
 function stringify_primitive(thing) {
@@ -486,7 +893,7 @@ function stringify_primitive(thing) {
 }
 function error(status, message) {
   if (isNaN(status) || status < 400 || status > 599) {
-    throw new Error(`HTTP error status codes must be between 400 and 599 — ${status} is invalid`);
+    throw new Error(`HTTP error status codes must be between 400 and 599 \u2014 ${status} is invalid`);
   }
   return new HttpError(status, message);
 }
@@ -504,7 +911,7 @@ function json(data, init2) {
     headers
   });
 }
-const encoder$1 = new TextEncoder();
+var encoder$1 = new TextEncoder();
 function text(body, init2) {
   const headers = new Headers(init2?.headers);
   if (!headers.has("content-length")) {
@@ -548,7 +955,7 @@ function decode_params(params) {
   }
   return params;
 }
-const tracked_url_properties = ["href", "pathname", "search", "searchParams", "toString", "toJSON"];
+var tracked_url_properties = ["href", "pathname", "search", "searchParams", "toString", "toJSON"];
 function make_trackable(url, callback) {
   const tracked = new URL(url);
   for (const property of tracked_url_properties) {
@@ -588,7 +995,7 @@ function disable_search(url) {
     });
   }
 }
-const DATA_SUFFIX = "/__data.json";
+var DATA_SUFFIX = "/__data.json";
 function has_data_suffix(pathname) {
   return pathname.endsWith(DATA_SUFFIX);
 }
@@ -598,7 +1005,7 @@ function add_data_suffix(pathname) {
 function strip_data_suffix(pathname) {
   return pathname.slice(0, -DATA_SUFFIX.length);
 }
-const GENERIC_ERROR = {
+var GENERIC_ERROR = {
   id: "__error"
 };
 function method_not_allowed(mod, method) {
@@ -771,8 +1178,8 @@ function is_action_json_request(event) {
   ]);
   return accept === "application/json" && event.request.method === "POST";
 }
-async function handle_action_json_request(event, options2, server) {
-  const actions = server?.actions;
+async function handle_action_json_request(event, options2, server2) {
+  const actions = server2?.actions;
   if (!actions) {
     const no_actions_error = error(405, "POST method not allowed. No actions exist for this page");
     return action_json(
@@ -849,8 +1256,8 @@ function action_json(data, init2) {
 function is_action_request(event) {
   return event.request.method === "POST";
 }
-async function handle_action_request(event, server) {
-  const actions = server?.actions;
+async function handle_action_request(event, server2) {
+  const actions = server2?.actions;
   if (!actions) {
     event.setHeaders({
       // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
@@ -925,16 +1332,6 @@ async function call_action(event, actions) {
     );
   }
   return action(event);
-}
-function validate_action_return(data) {
-  if (data instanceof Redirect) {
-    throw new Error(`Cannot \`return redirect(...)\` — use \`throw redirect(...)\` instead`);
-  }
-  if (data instanceof HttpError) {
-    throw new Error(
-      `Cannot \`return error(...)\` — use \`throw error(...)\` or \`return fail(...)\` instead`
-    );
-  }
 }
 function uneval_action_response(data, route_id) {
   return try_deserialize(data, uneval, route_id);
@@ -1146,7 +1543,7 @@ function create_universal_fetch(event, state, fetched, csr, resolve_opts) {
           const included = resolve_opts.filterSerializedResponseHeaders(lower, value);
           if (!included) {
             throw new Error(
-              `Failed to get response header "${lower}" — it must be included by the \`filterSerializedResponseHeaders\` option: https://kit.svelte.dev/docs/hooks#server-hooks-handle (at ${event.route.id})`
+              `Failed to get response header "${lower}" \u2014 it must be included by the \`filterSerializedResponseHeaders\` option: https://kit.svelte.dev/docs/hooks#server-hooks-handle (at ${event.route.id})`
             );
           }
         }
@@ -1176,7 +1573,7 @@ function validate_load_response(data, routeId) {
     );
   }
 }
-const subscriber_queue = [];
+var subscriber_queue = [];
 function readable(value, start) {
   return {
     subscribe: writable(value, start).subscribe
@@ -1206,13 +1603,13 @@ function writable(value, start = noop) {
   function update(fn) {
     set(fn(value));
   }
-  function subscribe(run, invalidate = noop) {
-    const subscriber = [run, invalidate];
+  function subscribe2(run2, invalidate = noop) {
+    const subscriber = [run2, invalidate];
     subscribers.add(subscriber);
     if (subscribers.size === 1) {
       stop = start(set) || noop;
     }
-    run(value);
+    run2(value);
     return () => {
       subscribers.delete(subscriber);
       if (subscribers.size === 0) {
@@ -1221,7 +1618,7 @@ function writable(value, start = noop) {
       }
     };
   }
-  return { set, update, subscribe };
+  return { set, update, subscribe: subscribe2 };
 }
 function hash(value) {
   let hash2 = 5381;
@@ -1239,11 +1636,11 @@ function hash(value) {
   }
   return (hash2 >>> 0).toString(36);
 }
-const escape_html_attr_dict = {
+var escape_html_attr_dict = {
   "&": "&amp;",
   '"': "&quot;"
 };
-const escape_html_attr_regex = new RegExp(
+var escape_html_attr_regex = new RegExp(
   // special characters
   `[${Object.keys(escape_html_attr_dict).join("")}]|[\\ud800-\\udbff](?![\\udc00-\\udfff])|[\\ud800-\\udbff][\\udc00-\\udfff]|[\\udc00-\\udfff]`,
   "g"
@@ -1257,12 +1654,12 @@ function escape_html_attr(str) {
   });
   return `"${escaped_str}"`;
 }
-const replacements = {
+var replacements = {
   "<": "\\u003C",
   "\u2028": "\\u2028",
   "\u2029": "\\u2029"
 };
-const pattern = new RegExp(`[${Object.keys(replacements).join("")}]`, "g");
+var pattern = new RegExp(`[${Object.keys(replacements).join("")}]`, "g");
 function serialize_data(fetched, filter, prerendering = false) {
   const headers = {};
   let cache_control = null;
@@ -1303,8 +1700,8 @@ function serialize_data(fetched, filter, prerendering = false) {
   }
   return `<script ${attrs.join(" ")}>${safe_payload}<\/script>`;
 }
-const s = JSON.stringify;
-const encoder = new TextEncoder();
+var s = JSON.stringify;
+var encoder = new TextEncoder();
 function sha256(data) {
   if (!key[0])
     precompute();
@@ -1354,8 +1751,8 @@ function sha256(data) {
   reverse_endianness(bytes);
   return base64(bytes);
 }
-const init = new Uint32Array(8);
-const key = new Uint32Array(64);
+var init = new Uint32Array(8);
+var key = new Uint32Array(64);
 function precompute() {
   function frac(x) {
     return (x - Math.floor(x)) * 4294967296;
@@ -1403,7 +1800,7 @@ function encode$1(str) {
   words[words.length - 1] = length;
   return words;
 }
-const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".split("");
+var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".split("");
 function base64(bytes) {
   const l = bytes.length;
   let result = "";
@@ -1427,12 +1824,12 @@ function base64(bytes) {
   }
   return result;
 }
-const array = new Uint8Array(16);
+var array = new Uint8Array(16);
 function generate_nonce() {
   crypto.getRandomValues(array);
   return base64(array);
 }
-const quoted = /* @__PURE__ */ new Set([
+var quoted = /* @__PURE__ */ new Set([
   "self",
   "unsafe-eval",
   "unsafe-hashes",
@@ -1443,58 +1840,59 @@ const quoted = /* @__PURE__ */ new Set([
   "wasm-unsafe-eval",
   "script"
 ]);
-const crypto_pattern = /^(nonce|sha\d\d\d)-/;
-class BaseProvider {
-  /** @type {boolean} */
-  #use_hashes;
-  /** @type {boolean} */
-  #script_needs_csp;
-  /** @type {boolean} */
-  #style_needs_csp;
-  /** @type {import('types').CspDirectives} */
-  #directives;
-  /** @type {import('types').Csp.Source[]} */
-  #script_src;
-  /** @type {import('types').Csp.Source[]} */
-  #style_src;
-  /** @type {string} */
-  #nonce;
+var crypto_pattern = /^(nonce|sha\d\d\d)-/;
+var _use_hashes, _script_needs_csp, _style_needs_csp, _directives, _script_src, _style_src, _nonce;
+var BaseProvider = class {
   /**
    * @param {boolean} use_hashes
    * @param {import('types').CspDirectives} directives
    * @param {string} nonce
    */
   constructor(use_hashes, directives, nonce) {
-    this.#use_hashes = use_hashes;
-    this.#directives = directives;
-    const d = this.#directives;
-    this.#script_src = [];
-    this.#style_src = [];
+    /** @type {boolean} */
+    __privateAdd(this, _use_hashes, void 0);
+    /** @type {boolean} */
+    __privateAdd(this, _script_needs_csp, void 0);
+    /** @type {boolean} */
+    __privateAdd(this, _style_needs_csp, void 0);
+    /** @type {import('types').CspDirectives} */
+    __privateAdd(this, _directives, void 0);
+    /** @type {import('types').Csp.Source[]} */
+    __privateAdd(this, _script_src, void 0);
+    /** @type {import('types').Csp.Source[]} */
+    __privateAdd(this, _style_src, void 0);
+    /** @type {string} */
+    __privateAdd(this, _nonce, void 0);
+    __privateSet(this, _use_hashes, use_hashes);
+    __privateSet(this, _directives, directives);
+    const d = __privateGet(this, _directives);
+    __privateSet(this, _script_src, []);
+    __privateSet(this, _style_src, []);
     const effective_script_src = d["script-src"] || d["default-src"];
     const effective_style_src = d["style-src"] || d["default-src"];
-    this.#script_needs_csp = !!effective_script_src && effective_script_src.filter((value) => value !== "unsafe-inline").length > 0;
-    this.#style_needs_csp = !!effective_style_src && effective_style_src.filter((value) => value !== "unsafe-inline").length > 0;
-    this.script_needs_nonce = this.#script_needs_csp && !this.#use_hashes;
-    this.style_needs_nonce = this.#style_needs_csp && !this.#use_hashes;
-    this.#nonce = nonce;
+    __privateSet(this, _script_needs_csp, !!effective_script_src && effective_script_src.filter((value) => value !== "unsafe-inline").length > 0);
+    __privateSet(this, _style_needs_csp, !!effective_style_src && effective_style_src.filter((value) => value !== "unsafe-inline").length > 0);
+    this.script_needs_nonce = __privateGet(this, _script_needs_csp) && !__privateGet(this, _use_hashes);
+    this.style_needs_nonce = __privateGet(this, _style_needs_csp) && !__privateGet(this, _use_hashes);
+    __privateSet(this, _nonce, nonce);
   }
   /** @param {string} content */
   add_script(content) {
-    if (this.#script_needs_csp) {
-      if (this.#use_hashes) {
-        this.#script_src.push(`sha256-${sha256(content)}`);
-      } else if (this.#script_src.length === 0) {
-        this.#script_src.push(`nonce-${this.#nonce}`);
+    if (__privateGet(this, _script_needs_csp)) {
+      if (__privateGet(this, _use_hashes)) {
+        __privateGet(this, _script_src).push(`sha256-${sha256(content)}`);
+      } else if (__privateGet(this, _script_src).length === 0) {
+        __privateGet(this, _script_src).push(`nonce-${__privateGet(this, _nonce)}`);
       }
     }
   }
   /** @param {string} content */
   add_style(content) {
-    if (this.#style_needs_csp) {
-      if (this.#use_hashes) {
-        this.#style_src.push(`sha256-${sha256(content)}`);
-      } else if (this.#style_src.length === 0) {
-        this.#style_src.push(`nonce-${this.#nonce}`);
+    if (__privateGet(this, _style_needs_csp)) {
+      if (__privateGet(this, _use_hashes)) {
+        __privateGet(this, _style_src).push(`sha256-${sha256(content)}`);
+      } else if (__privateGet(this, _style_src).length === 0) {
+        __privateGet(this, _style_src).push(`nonce-${__privateGet(this, _nonce)}`);
       }
     }
   }
@@ -1503,17 +1901,17 @@ class BaseProvider {
    */
   get_header(is_meta = false) {
     const header = [];
-    const directives = { ...this.#directives };
-    if (this.#style_src.length > 0) {
+    const directives = { ...__privateGet(this, _directives) };
+    if (__privateGet(this, _style_src).length > 0) {
       directives["style-src"] = [
         ...directives["style-src"] || directives["default-src"] || [],
-        ...this.#style_src
+        ...__privateGet(this, _style_src)
       ];
     }
-    if (this.#script_src.length > 0) {
+    if (__privateGet(this, _script_src).length > 0) {
       directives["script-src"] = [
         ...directives["script-src"] || directives["default-src"] || [],
-        ...this.#script_src
+        ...__privateGet(this, _script_src)
       ];
     }
     for (const key2 in directives) {
@@ -1540,14 +1938,21 @@ class BaseProvider {
     }
     return header.join("; ");
   }
-}
-class CspProvider extends BaseProvider {
+};
+_use_hashes = new WeakMap();
+_script_needs_csp = new WeakMap();
+_style_needs_csp = new WeakMap();
+_directives = new WeakMap();
+_script_src = new WeakMap();
+_style_src = new WeakMap();
+_nonce = new WeakMap();
+var CspProvider = class extends BaseProvider {
   get_meta() {
     const content = escape_html_attr(this.get_header(true));
     return `<meta http-equiv="content-security-policy" content=${content}>`;
   }
-}
-class CspReportOnlyProvider extends BaseProvider {
+};
+var CspReportOnlyProvider = class extends BaseProvider {
   /**
    * @param {boolean} use_hashes
    * @param {import('types').CspDirectives} directives
@@ -1565,19 +1970,19 @@ class CspReportOnlyProvider extends BaseProvider {
       }
     }
   }
-}
-class Csp {
-  /** @readonly */
-  nonce = generate_nonce();
-  /** @type {CspProvider} */
-  csp_provider;
-  /** @type {CspReportOnlyProvider} */
-  report_only_provider;
+};
+var Csp = class {
   /**
    * @param {import('./types').CspConfig} config
    * @param {import('./types').CspOpts} opts
    */
   constructor({ mode, directives, reportOnly }, { prerender }) {
+    /** @readonly */
+    __publicField(this, "nonce", generate_nonce());
+    /** @type {CspProvider} */
+    __publicField(this, "csp_provider");
+    /** @type {CspReportOnlyProvider} */
+    __publicField(this, "report_only_provider");
     const use_hashes = mode === "hash" || mode === "auto" && prerender;
     this.csp_provider = new CspProvider(use_hashes, directives, this.nonce);
     this.report_only_provider = new CspReportOnlyProvider(use_hashes, reportOnly, this.nonce);
@@ -1598,8 +2003,8 @@ class Csp {
     this.csp_provider.add_style(content);
     this.report_only_provider.add_style(content);
   }
-}
-const updated = {
+};
+var updated = {
   ...readable(false),
   check: () => false
 };
@@ -1607,7 +2012,7 @@ async function render_response({
   branch,
   fetched,
   options: options2,
-  manifest,
+  manifest: manifest2,
   state,
   page_config,
   status,
@@ -1624,10 +2029,10 @@ async function render_response({
       throw new Error("Cannot use prerendering if page template contains %sveltekit.nonce%");
     }
   }
-  const { entry } = manifest._;
-  const stylesheets = new Set(entry.stylesheets);
+  const { entry } = manifest2._;
+  const stylesheets4 = new Set(entry.stylesheets);
   const modulepreloads = new Set(entry.imports);
-  const fonts = new Set(manifest._.entry.fonts);
+  const fonts4 = new Set(manifest2._.entry.fonts);
   const link_header_preloads = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
   let rendered;
@@ -1665,10 +2070,10 @@ async function render_response({
         node.imports.forEach((url) => modulepreloads.add(url));
       }
       if (node.stylesheets) {
-        node.stylesheets.forEach((url) => stylesheets.add(url));
+        node.stylesheets.forEach((url) => stylesheets4.add(url));
       }
       if (node.fonts) {
-        node.fonts.forEach((url) => fonts.add(url));
+        node.fonts.forEach((url) => fonts4.add(url));
       }
       if (node.inline_styles) {
         Object.entries(await node.inline_styles()).forEach(([k, v]) => inline_styles.set(k, v));
@@ -1746,7 +2151,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${content}</style>`;
   }
-  for (const dep of stylesheets) {
+  for (const dep of stylesheets4) {
     const path = prefixed(dep);
     if (resolve_opts.preload({ type: "css", path })) {
       const attributes = ['rel="stylesheet"'];
@@ -1760,7 +2165,7 @@ async function render_response({
 		<link href="${path}" ${attributes.join(" ")}>`;
     }
   }
-  for (const dep of fonts) {
+  for (const dep of fonts4) {
     const path = prefixed(dep);
     if (resolve_opts.preload({ type: "font", path })) {
       const ext = dep.slice(dep.lastIndexOf(".") + 1);
@@ -1897,7 +2302,7 @@ async function render_response({
 async function respond_with_error({
   event,
   options: options2,
-  manifest,
+  manifest: manifest2,
   state,
   status,
   error: error2,
@@ -1906,7 +2311,7 @@ async function respond_with_error({
   const fetched = [];
   try {
     const branch = [];
-    const default_layout = await manifest._.nodes[0]();
+    const default_layout = await manifest2._.nodes[0]();
     const ssr = get_option([default_layout], "ssr") ?? true;
     const csr = get_option([default_layout], "csr") ?? true;
     if (ssr) {
@@ -1935,7 +2340,7 @@ async function respond_with_error({
           data
         },
         {
-          node: await manifest._.nodes[1](),
+          node: await manifest2._.nodes[1](),
           // 1 is always the root error
           data: null,
           server_data: null
@@ -1944,7 +2349,7 @@ async function respond_with_error({
     }
     return await render_response({
       options: options2,
-      manifest,
+      manifest: manifest2,
       state,
       page_config: {
         ssr,
@@ -1968,7 +2373,7 @@ async function respond_with_error({
     );
   }
 }
-async function render_page(event, route, page, options2, manifest, state, resolve_opts) {
+async function render_page(event, route, page2, options2, manifest2, state, resolve_opts) {
   if (state.initiator === route) {
     return text(`Not found: ${event.url.pathname}`, {
       status: 404
@@ -1976,14 +2381,14 @@ async function render_page(event, route, page, options2, manifest, state, resolv
   }
   state.initiator = route;
   if (is_action_json_request(event)) {
-    const node = await manifest._.nodes[page.leaf]();
+    const node = await manifest2._.nodes[page2.leaf]();
     return handle_action_json_request(event, options2, node?.server);
   }
   try {
     const nodes = await Promise.all([
       // we use == here rather than === because [undefined] serializes as "[null]"
-      ...page.layouts.map((n) => n == void 0 ? n : manifest._.nodes[n]()),
-      manifest._.nodes[page.leaf]()
+      ...page2.layouts.map((n) => n == void 0 ? n : manifest2._.nodes[n]()),
+      manifest2._.nodes[page2.leaf]()
     ]);
     const leaf_node = (
       /** @type {import('types').SSRNode} */
@@ -2025,7 +2430,7 @@ async function render_page(event, route, page, options2, manifest, state, resolv
           error: null,
           event,
           options: options2,
-          manifest,
+          manifest: manifest2,
           state,
           resolve_opts
         });
@@ -2048,7 +2453,7 @@ async function render_page(event, route, page, options2, manifest, state, resolv
         error: null,
         event,
         options: options2,
-        manifest,
+        manifest: manifest2,
         state,
         resolve_opts
       });
@@ -2145,19 +2550,19 @@ async function render_page(event, route, page, options2, manifest, state, resolv
           const status2 = err instanceof HttpError ? err.status : 500;
           const error2 = await handle_error_and_jsonify(event, options2, err);
           while (i--) {
-            if (page.errors[i]) {
-              const index = (
+            if (page2.errors[i]) {
+              const index4 = (
                 /** @type {number} */
-                page.errors[i]
+                page2.errors[i]
               );
-              const node2 = await manifest._.nodes[index]();
+              const node2 = await manifest2._.nodes[index4]();
               let j = i;
               while (!branch[j])
                 j -= 1;
               return await render_response({
                 event,
                 options: options2,
-                manifest,
+                manifest: manifest2,
                 state,
                 resolve_opts,
                 page_config: { ssr: true, csr: true },
@@ -2188,7 +2593,7 @@ async function render_page(event, route, page, options2, manifest, state, resolv
     return await render_response({
       event,
       options: options2,
-      manifest,
+      manifest: manifest2,
       state,
       resolve_opts,
       page_config: {
@@ -2205,7 +2610,7 @@ async function render_page(event, route, page, options2, manifest, state, resolv
     return await respond_with_error({
       event,
       options: options2,
-      manifest,
+      manifest: manifest2,
       state,
       status: 500,
       error: e,
@@ -2264,8 +2669,8 @@ function once(fn) {
     return result = fn();
   };
 }
-const INVALIDATED_PARAM = "x-sveltekit-invalidated";
-async function render_data(event, route, options2, manifest, state, invalidated_data_nodes, trailing_slash) {
+var INVALIDATED_PARAM = "x-sveltekit-invalidated";
+async function render_data(event, route, options2, manifest2, state, invalidated_data_nodes, trailing_slash) {
   if (!route.page) {
     return new Response(void 0, {
       status: 404
@@ -2290,7 +2695,7 @@ async function render_data(event, route, options2, manifest, state, invalidated_
               }
             );
           }
-          const node = n == void 0 ? n : await manifest._.nodes[n]();
+          const node = n == void 0 ? n : await manifest2._.nodes[n]();
           return load_server_data({
             event: new_event,
             state,
@@ -2382,12 +2787,6 @@ function redirect_json_response(redirect) {
     })
   );
 }
-/*!
- * cookie
- * Copyright(c) 2012-2014 Roman Shtylman
- * Copyright(c) 2015 Douglas Christopher Wilson
- * MIT Licensed
- */
 var parse_1 = parse$1;
 var serialize_1 = serialize;
 var __toString = Object.prototype.toString;
@@ -2399,20 +2798,20 @@ function parse$1(str, options2) {
   var obj = {};
   var opt = options2 || {};
   var dec = opt.decode || decode;
-  var index = 0;
-  while (index < str.length) {
-    var eqIdx = str.indexOf("=", index);
+  var index4 = 0;
+  while (index4 < str.length) {
+    var eqIdx = str.indexOf("=", index4);
     if (eqIdx === -1) {
       break;
     }
-    var endIdx = str.indexOf(";", index);
+    var endIdx = str.indexOf(";", index4);
     if (endIdx === -1) {
       endIdx = str.length;
     } else if (endIdx < eqIdx) {
-      index = str.lastIndexOf(";", eqIdx - 1) + 1;
+      index4 = str.lastIndexOf(";", eqIdx - 1) + 1;
       continue;
     }
-    var key2 = str.slice(index, eqIdx).trim();
+    var key2 = str.slice(index4, eqIdx).trim();
     if (void 0 === obj[key2]) {
       var val = str.slice(eqIdx + 1, endIdx).trim();
       if (val.charCodeAt(0) === 34) {
@@ -2420,7 +2819,7 @@ function parse$1(str, options2) {
       }
       obj[key2] = tryDecode(val, dec);
     }
-    index = endIdx + 1;
+    index4 = endIdx + 1;
   }
   return obj;
 }
@@ -2806,7 +3205,7 @@ setCookie.exports = parse;
 setCookieExports.parse = parse;
 var parseString_1 = setCookieExports.parseString = parseString;
 var splitCookiesString_1 = setCookieExports.splitCookiesString = splitCookiesString;
-function create_fetch({ event, options: options2, manifest, state, get_cookie_header }) {
+function create_fetch({ event, options: options2, manifest: manifest2, state, get_cookie_header }) {
   return async (info, init2) => {
     const original_request = normalize_fetch_input(info, init2, event.url);
     const request_body = init2?.body;
@@ -2841,13 +3240,13 @@ function create_fetch({ event, options: options2, manifest, state, get_cookie_he
         const decoded = decodeURIComponent(url.pathname);
         const filename = (decoded.startsWith(prefix) ? decoded.slice(prefix.length) : decoded).slice(1);
         const filename_html = `${filename}/index.html`;
-        const is_asset = manifest.assets.has(filename);
-        const is_asset_html = manifest.assets.has(filename_html);
+        const is_asset = manifest2.assets.has(filename);
+        const is_asset_html = manifest2.assets.has(filename_html);
         if (is_asset || is_asset_html) {
-          const file = is_asset ? filename : filename_html;
+          const file4 = is_asset ? filename : filename_html;
           if (state.read) {
-            const type = is_asset ? manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
-            return new Response(state.read(file), {
+            const type = is_asset ? manifest2.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
+            return new Response(state.read(file4), {
               headers: type ? { "content-type": type } : {}
             });
           }
@@ -2876,7 +3275,7 @@ function create_fetch({ event, options: options2, manifest, state, get_cookie_he
             event.request.headers.get("accept-language")
           );
         }
-        response = await respond(request, options2, manifest, state);
+        response = await respond(request, options2, manifest2, state);
         const set_cookie = response.headers.get("set-cookie");
         if (set_cookie) {
           for (const str of splitCookiesString_1(set_cookie)) {
@@ -2916,14 +3315,14 @@ function validator(expected) {
   }
   return validate;
 }
-const validate_common_exports = validator([
+var validate_common_exports = validator([
   "load",
   "prerender",
   "csr",
   "ssr",
   "trailingSlash"
 ]);
-const validate_page_server_exports = validator([
+var validate_page_server_exports = validator([
   "load",
   "prerender",
   "csr",
@@ -2931,7 +3330,7 @@ const validate_page_server_exports = validator([
   "actions",
   "trailingSlash"
 ]);
-const validate_server_exports = validator([
+var validate_server_exports = validator([
   "GET",
   "POST",
   "PATCH",
@@ -2940,10 +3339,10 @@ const validate_server_exports = validator([
   "prerender",
   "trailingSlash"
 ]);
-const default_transform = ({ html }) => html;
-const default_filter = () => false;
-const default_preload = ({ type }) => type === "js" || type === "css";
-async function respond(request, options2, manifest, state) {
+var default_transform = ({ html }) => html;
+var default_filter = () => false;
+var default_preload = ({ type }) => type === "js" || type === "css";
+async function respond(request, options2, manifest2, state) {
   let url = new URL(request.url);
   if (options2.csrf_check_origin) {
     const forbidden = request.method === "POST" && request.headers.get("origin") !== url.origin && is_form_content_type(request);
@@ -2978,8 +3377,8 @@ async function respond(request, options2, manifest, state) {
     url.searchParams.delete(INVALIDATED_PARAM);
   }
   if (!state.prerendering?.fallback) {
-    const matchers = await manifest._.matchers();
-    for (const candidate of manifest._.routes) {
+    const matchers = await manifest2._.matchers();
+    for (const candidate of manifest2._.routes) {
       const match = candidate.pattern.exec(decoded);
       if (!match)
         continue;
@@ -3041,8 +3440,8 @@ async function respond(request, options2, manifest, state) {
       if (route.page) {
         const nodes = await Promise.all([
           // we use == here rather than === because [undefined] serializes as "[null]"
-          ...route.page.layouts.map((n) => n == void 0 ? n : manifest._.nodes[n]()),
-          manifest._.nodes[route.page.leaf]()
+          ...route.page.layouts.map((n) => n == void 0 ? n : manifest2._.nodes[n]()),
+          manifest2._.nodes[route.page.leaf]()
         ]);
         if (DEV)
           ;
@@ -3074,7 +3473,7 @@ async function respond(request, options2, manifest, state) {
     );
     cookies_to_add = new_cookies;
     event.cookies = cookies;
-    event.fetch = create_fetch({ event, options: options2, manifest, state, get_cookie_header });
+    event.fetch = create_fetch({ event, options: options2, manifest: manifest2, state, get_cookie_header });
     if (state.prerendering && !state.prerendering.fallback)
       disable_search(url);
     const response = await options2.hooks.handle({
@@ -3161,7 +3560,7 @@ async function respond(request, options2, manifest, state) {
         return await render_response({
           event: event2,
           options: options2,
-          manifest,
+          manifest: manifest2,
           state,
           page_config: { ssr: false, csr: true },
           status: 200,
@@ -3178,7 +3577,7 @@ async function respond(request, options2, manifest, state) {
             event2,
             route,
             options2,
-            manifest,
+            manifest2,
             state,
             invalidated_data_nodes,
             trailing_slash ?? "never"
@@ -3191,7 +3590,7 @@ async function respond(request, options2, manifest, state) {
             route,
             route.page,
             options2,
-            manifest,
+            manifest2,
             state,
             resolve_opts
           );
@@ -3209,7 +3608,7 @@ async function respond(request, options2, manifest, state) {
         return await respond_with_error({
           event: event2,
           options: options2,
-          manifest,
+          manifest: manifest2,
           state,
           status: 404,
           error: new Error(`Not found: ${event2.url.pathname}`),
@@ -3232,15 +3631,16 @@ async function respond(request, options2, manifest, state) {
     }
   }
 }
-class Server {
-  /** @type {import('types').SSROptions} */
-  #options;
-  /** @type {import('types').SSRManifest} */
-  #manifest;
+var _options, _manifest;
+var Server = class {
   /** @param {import('types').SSRManifest} manifest */
-  constructor(manifest) {
-    this.#options = options;
-    this.#manifest = manifest;
+  constructor(manifest2) {
+    /** @type {import('types').SSROptions} */
+    __privateAdd(this, _options, void 0);
+    /** @type {import('types').SSRManifest} */
+    __privateAdd(this, _manifest, void 0);
+    __privateSet(this, _options, options);
+    __privateSet(this, _manifest, manifest2);
   }
   /**
    * @param {{
@@ -3249,13 +3649,13 @@ class Server {
    */
   async init({ env }) {
     const entries = Object.entries(env);
-    const prefix = this.#options.env_public_prefix;
+    const prefix = __privateGet(this, _options).env_public_prefix;
     Object.fromEntries(entries.filter(([k]) => !k.startsWith(prefix)));
     const pub = Object.fromEntries(entries.filter(([k]) => k.startsWith(prefix)));
     set_public_env(pub);
-    if (!this.#options.hooks) {
+    if (!__privateGet(this, _options).hooks) {
       const module = await get_hooks();
-      this.#options.hooks = {
+      __privateGet(this, _options).hooks = {
         handle: module.handle || (({ event, resolve }) => resolve(event)),
         // @ts-expect-error
         handleError: module.handleError || (({ error: error2 }) => console.error(error2?.stack)),
@@ -3273,9 +3673,60 @@ class Server {
         "The first argument to server.respond must be a Request object. See https://github.com/sveltejs/kit/pull/3384 for details"
       );
     }
-    return respond(request, this.#options, this.#manifest, options2);
+    return respond(request, __privateGet(this, _options), __privateGet(this, _manifest), options2);
   }
-}
-export {
-  Server
 };
+_options = new WeakMap();
+_manifest = new WeakMap();
+
+// .svelte-kit/vercel-tmp/render/manifest.js
+var manifest = {
+  appDir: "_app",
+  appPath: "_app",
+  assets: /* @__PURE__ */ new Set(["favicon.png", "resume.json", "robots.txt"]),
+  mimeTypes: { ".png": "image/png", ".json": "application/json", ".txt": "text/plain" },
+  _: {
+    entry: { "file": "_app/immutable/start-83633fc2.js", "imports": ["_app/immutable/start-83633fc2.js", "_app/immutable/chunks/index-2cc330bf.js", "_app/immutable/chunks/singletons-f13ea139.js"], "stylesheets": [], "fonts": [] },
+    nodes: [
+      () => Promise.resolve().then(() => (init__(), __exports)),
+      () => Promise.resolve().then(() => (init__2(), __exports2)),
+      () => Promise.resolve().then(() => (init__3(), __exports3))
+    ],
+    routes: [
+      {
+        id: "/",
+        pattern: /^\/$/,
+        params: [],
+        page: { layouts: [0], errors: [1], leaf: 2 },
+        endpoint: null
+      }
+    ],
+    matchers: async () => {
+      return {};
+    }
+  }
+};
+
+// .svelte-kit/vercel-tmp/render/edge.js
+var server = new Server(manifest);
+var initialized = server.init({
+  env: process.env
+});
+var edge_default = async (request) => {
+  await initialized;
+  return server.respond(request, {
+    getClientAddress() {
+      return request.headers.get("x-forwarded-for");
+    }
+  });
+};
+export {
+  edge_default as default
+};
+/*!
+ * cookie
+ * Copyright(c) 2012-2014 Roman Shtylman
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+//# sourceMappingURL=index.js.map
