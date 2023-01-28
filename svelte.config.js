@@ -9,9 +9,7 @@ const config = {
 
 	kit: {
 		// hydrate the <div id="svelte"> element in src/app.html
-		adapter: vercel({
-			edge: false
-		})
+		adapter: vercel()
 	}
 };
 
