@@ -11,9 +11,11 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
-	"devDependencies": {
+	"dependencies": {
 		"@sveltejs/kit": "^1.3.2",
-		"@sveltejs/adapter-vercel": "^1.0.5",
+		"@sveltejs/adapter-vercel": "^1.0.5"
+	},
+	"devDependencies": {
 		"@types/cookie": "^0.5.1",
 		"@typescript-eslint/eslint-plugin": "^5.49.0",
 		"@typescript-eslint/parser": "^5.49.0",
