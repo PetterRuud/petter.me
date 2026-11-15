@@ -43,12 +43,12 @@
 		'hello world': () => 'congrats, you are now a programmer'
 	};
 
-	let lines: Line[] = [];
-	let input = '';
+	let lines: Line[] = $state([]);
+	let input = $state('');
 	let history: string[] = [];
 	let historyIndex = -1;
-	let field: HTMLInputElement;
-	let uptime = '00:00:00';
+	let field: HTMLInputElement | undefined = $state();
+	let uptime = $state('00:00:00');
 
 	function run(raw: string) {
 		const cmd = raw.trim().replace(/\s+/g, ' ');
@@ -121,7 +121,7 @@
 	/>
 </svelte:head>
 
-<div class="crt" aria-hidden="true" />
+<div class="crt" aria-hidden="true"></div>
 
 <div class="container">
 	<header class="header">
@@ -166,13 +166,15 @@
 
 			<ul class="stats reveal r3">
 				<li><span class="ok">[ OK ]</span> compiling personality… 0 errors, 42 warnings</li>
-				<li><span class="ok">[ OK ]</span> loaded <code>tabs</code> &gt; <code>spaces</code> (fight me)</li>
+				<li>
+					<span class="ok">[ OK ]</span> loaded <code>tabs</code> &gt; <code>spaces</code> (fight me)
+				</li>
 				<li>
 					<span class="warn">[WARN]</span> <code>coffee.level</code> below threshold — refilling
 				</li>
 			</ul>
 
-			<div class="term reveal r4" on:click={() => field?.focus()} role="presentation">
+			<div class="term reveal r4" onclick={() => field?.focus()} role="presentation">
 				{#each lines as line}
 					{#if line.kind === 'in'}
 						<p><span class="ps1">{prompt}</span> {line.text}</p>
@@ -185,7 +187,7 @@
 					<input
 						bind:this={field}
 						bind:value={input}
-						on:keydown={onKey}
+						onkeydown={onKey}
 						spellcheck="false"
 						autocomplete="off"
 						autocapitalize="off"
@@ -202,7 +204,7 @@
 		<span>⎇ master ✓</span>
 		<span class="hide-sm">utf-8</span>
 		<span class="hide-sm">200 OK</span>
-		<span class="grow" />
+		<span class="grow"></span>
 		<span class="hide-sm">uptime {uptime}</span>
 		<span>:q to exit</span>
 	</footer>
